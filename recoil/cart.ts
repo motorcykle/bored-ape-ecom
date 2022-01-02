@@ -1,13 +1,14 @@
 import { Ape } from "@prisma/client";
 import { atom } from "recoil";
 
+export interface product {
+    quantity: number;
+    ape: Ape
+}
 
 interface atomType {
     key: string;
-    default: {
-        quantity: number;
-        ape: Ape
-    }[];
+    default: product[];
 }
 
 const atomItem: atomType = {

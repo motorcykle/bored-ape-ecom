@@ -22,7 +22,7 @@ export function Cart() {
 
       <Popover.Panel className="absolute z-10 bg-neutral-50 p-3 rounded-xl border-2">
         <p className="text-2xl">CART</p>
-        <CartItems />
+        <CartItems items={cart} />
         <button onClick={checkout} className=' text-neutral-50 tracking-wide text-xl font-medium bg-black rounded-lg py-2 px-4'>Checkout</button>
       </Popover.Panel>
     </Popover>
