@@ -7,9 +7,30 @@ import Image from 'next/image';
 import { HeartIcon } from '@heroicons/react/solid';
 import { kFormatter } from '../../components/Ape';
 import WethIcon from '../../assets/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2.png';
+import { useRecoilState } from 'recoil';
+import { cartState } from '../../recoil/cart';
 
 export default function ApePage({ ape }: { ape: Ape }) {
     const { id, number, image_url, price, likes_opensea } = ape;
+    const [cart, setCart] = useRecoilState(cartState);
+
+    const addProduct = () => {
+        const apeInCart = cart.find(product => product.ape.id === id);
+
+        const newState = apeInCart ? cart.map(product => {
+            return (product.ape.id === id) ? {
+                ...product,
+                quantity: product.quantity + 1
+            } : {
+                ...product
+            }
+        }) : [...cart, {
+            ape: { ...ape },
+            quantity: 1,
+        }];
+
+        setCart(newState);
+    }
 
     return (
         <div className='p-3'>
@@ -31,7 +52,7 @@ export default function ApePage({ ape }: { ape: Ape }) {
 
                     <p className=''>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quis accusamus earum optio eligendi? Dolore ipsam dolorem illum dicta placeat ratione sit porro. Sapiente, optio. Optio accusamus molestiae aperiam quos nesciunt!</p>
 
-                    <button className=' text-neutral-50 tracking-wide text-xl font-medium bg-black rounded-lg py-2 px-4'>Add to cart</button>
+                    <button onClick={addProduct} className=' text-neutral-50 tracking-wide text-xl font-medium bg-black rounded-lg py-2 px-4'>Add to cart</button>
                 </div>
             </div>
         </div>
@@ -39,7 +60,7 @@ export default function ApePage({ ape }: { ape: Ape }) {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-    const { id } = context.query;
+    const { id } = context.query!;
 
     const ape = await prisma.ape.findFirst({
         where: {

@@ -1,5 +1,4 @@
 import type { NextPage } from 'next'
-import Head from 'next/head'
 import { prisma } from '../lib/prisma'
 import Apes from '../components/Apes'
 import Hero from '../components/Hero'
