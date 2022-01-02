@@ -46,7 +46,7 @@ const apes: Ape[] = [
         number: 2261,
         current_owner: "D8539B",
         price: 0.3647,
-        likes_opensea: 29,
+        likes_opensea: 31,
         image_url: "https://lh3.googleusercontent.com/JyQTUlISmzK07Ud9yH2BGkqEla6YzyZam0OV_R2LLcby486aW_Dk7oZ4mw5D3zCNN_l6N8orxgtBFOBpI-d1NDSMfMABWtBUkfH62XI=w542"
     }
 ]

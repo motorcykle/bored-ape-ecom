@@ -4,8 +4,9 @@ import apes from '../data/apes';
 const prisma = new PrismaClient();
 
 async function main() {
-  await prisma.feedback.createMany({
+  await prisma.ape.createMany({
     data: apes
+  })
 }
 
 main()
