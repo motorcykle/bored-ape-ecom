@@ -8,7 +8,7 @@ export default function Header() {
         <header className='p-3'>
             <nav className='flex items-center justify-between max-w-7xl mx-auto'>
                 <Link passHref={true} href="/">
-                    <p className='text-3xl font-bold'>BAYC</p>
+                    <p className='text-3xl font-bold cursor-pointer'>BAYC</p>
                 </Link>
 
                 <button>

@@ -11,19 +11,13 @@ export interface HomeProps {
 
 const Home: NextPage<HomeProps> = ({ apes }) => {
   return (
-    <div className={""}>
-      <Head>
-        <title>BAYC</title>
-        <meta name="description" content="Bored Ape Yacht Club Ecommerce" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
+    <>
       <main className=''>
         <Hero />
         <Apes apes={apes} />
       </main>
       
-    </div>
+    </>
   )
 }
 

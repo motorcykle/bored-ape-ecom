@@ -3,12 +3,14 @@ import Image from 'next/image'
 import React from 'react'
 import WethIcon from '../assets/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2.png';
 import { HeartIcon } from '@heroicons/react/solid';
+import Link from 'next/link';
 
 export default function Ape({ ape }: { ape: ApeType }) {
     const { id, number, image_url, price, likes_opensea } = ape;
 
     return (
-        <div className='border rounded-2xl p-2 overflow-hidden'>
+        <Link passHref href={`/ape/${id}`}>
+        <div className='border rounded-2xl p-2 overflow-hidden cursor-pointer'>
            <img src={image_url} alt="" />
            <div className="mt-2">
                <div className='flex justify-between'>
@@ -26,9 +28,11 @@ export default function Ape({ ape }: { ape: ApeType }) {
                
            </div>
         </div>
+        </Link>
     )
 }
 
-function kFormatter(num: number) {
+export function kFormatter(num: number) {
     return Math.abs(num) > 999 ? Math.sign(num)*((Math.abs(num)/1000).toFixed(1)) + 'k' : Math.sign(num)*Math.abs(num)
 }
+
