@@ -10,7 +10,7 @@ export default function Hero() {
                 <div className="">
                     <Image src={BaycImg} alt='' objectFit='contain' className='max-w-full'/>
                 </div>
-                <div className="flex flex-col justify-center items-start md:order-first">
+                <div className="flex flex-col justify-center items-center text-center md:order-first">
                     <h1 className='text-7xl font-black'>
                         Bored Ape Yacht Club
                     </h1>
