@@ -14,16 +14,22 @@ export function Cart() {
     setCart([]);
   }
 
+  const totalPriceCalc = () => {
+    const sum = cart.reduce((previousValue, currentValue) => previousValue + (currentValue.ape.price * currentValue.quantity), 0)
+    return Math.floor(sum * 100) / 100;
+  }
+
   return (
     <Popover className="relative">
       <Popover.Button>
-        <ShoppingBagIcon className='h-10 w-10' />
+        <ShoppingBagIcon className='w-10 h-10' />
       </Popover.Button>
 
-      <Popover.Panel className="absolute z-10 bg-neutral-50 p-3 rounded-xl border-2">
+      <Popover.Panel className="absolute right-0 z-10 p-3 border-2 min-w-max bg-neutral-50 rounded-xl">
         <p className="text-2xl">CART</p>
         <CartItems items={cart} />
-        <button onClick={checkout} className=' text-neutral-50 tracking-wide text-xl font-medium bg-black rounded-lg py-2 px-4'>Checkout</button>
+        <p className='mb-1 text-zinc-500'>Total price: <span className='font-medium text-zinc-900'>{totalPriceCalc()} (WETH)</span></p>
+        <button onClick={checkout} className='px-4 py-2 text-xl font-medium tracking-wide bg-black rounded-lg text-neutral-50'>Checkout</button>
       </Popover.Panel>
     </Popover>
   )

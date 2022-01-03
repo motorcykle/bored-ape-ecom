@@ -7,13 +7,11 @@ interface cartProps {
 }
 
 export default function CartItems({ items }: cartProps) {
-
-    
-
     return (
-        <div>
-            {/* {{/* if cart length is more than 0 */}} */}
-            <CartItem item={items[0]} />
+        <div className='flex flex-col py-2 space-y-2'>
+            {items.length > 0 && items.map(item => (
+                <CartItem key={item.ape.id} item={item} />
+            ))}
         </div>
     )
 }
