@@ -4,16 +4,13 @@ import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { cartState } from '../../recoil/cart';
 import CartItems from './CartItems';
+import { loadStripe } from '@stripe/stripe-js';
 
 
 export function Cart() {
   const [cart, setCart] = useRecoilState(cartState);
   const [convertedTotalPrice, setConvertedTotalPrice] = useState(0);
-  
-  const checkout = () => {
-    console.log("checkout", cart)
-    setCart([]);
-  }
+
 
   const truncNum = (num: number) => Math.floor(num * 100) / 100;
 
@@ -32,6 +29,35 @@ export function Cart() {
     } catch (error) {
       console.error(error)
     }
+  }
+
+  const redirectToCheckout = async () => {
+    try {
+      const stripe = await loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY!);
+
+      const sessionIdRes = await fetch('/api/checkout', {
+        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(cart) // body data type must match "Content-Type" header
+      })
+
+      const { id: sessionId } = await sessionIdRes.json();
+    
+      return stripe!.redirectToCheckout({
+        sessionId
+      });
+    } catch (error) {
+      console.log(error)
+    }
+  };
+
+    
+  const checkout = () => {
+    console.log("checkout", cart)
+    redirectToCheckout()
+    setCart([]);
   }
 
   return (
